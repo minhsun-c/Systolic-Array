@@ -1,0 +1,103 @@
+module WT_Multiplier32x32 (
+	output [63:0] Product,
+	input [31:0] A, B
+);
+
+	wire [63:0] pdt0, pdt1, pdt2, pdt3, pdt4, pdt5, pdt6, pdt7, pdt8, pdt9, pdt10, pdt11, pdt12, pdt13, pdt14, pdt15, pdt16, pdt17, pdt18, pdt19, pdt20, pdt21, pdt22, pdt23, pdt24, pdt25, pdt26, pdt27, pdt28, pdt29, pdt30, pdt31;
+
+	assign pdt0 = {64'b0, A & {16{B[0]}}	  };
+	assign pdt1 = {63'b0, A & {16{B[1]}}, 1'b0};
+	assign pdt2 = {62'b0, A & {16{B[2]}}, 2'b0};
+	assign pdt3 = {61'b0, A & {16{B[3]}}, 3'b0};
+	assign pdt4 = {60'b0, A & {16{B[4]}}, 4'b0};
+	assign pdt5 = {59'b0, A & {16{B[5]}}, 5'b0};
+	assign pdt6 = {58'b0, A & {16{B[6]}}, 6'b0};
+	assign pdt7 = {57'b0, A & {16{B[7]}}, 7'b0};
+	assign pdt8 = {56'b0, A & {16{B[8]}}, 8'b0};
+	assign pdt9 = {55'b0, A & {16{B[9]}}, 9'b0};
+	assign pdt10 = {54'b0, A & {16{B[10]}}, 10'b0};
+	assign pdt11 = {53'b0, A & {16{B[11]}}, 11'b0};
+	assign pdt12 = {52'b0, A & {16{B[12]}}, 12'b0};
+	assign pdt13 = {51'b0, A & {16{B[13]}}, 13'b0};
+	assign pdt14 = {50'b0, A & {16{B[14]}}, 14'b0};
+	assign pdt15 = {49'b0, A & {16{B[15]}}, 15'b0};
+	assign pdt16 = {48'b0, A & {16{B[16]}}, 16'b0};
+	assign pdt17 = {47'b0, A & {16{B[17]}}, 17'b0};
+	assign pdt18 = {46'b0, A & {16{B[18]}}, 18'b0};
+	assign pdt19 = {45'b0, A & {16{B[19]}}, 19'b0};
+	assign pdt20 = {44'b0, A & {16{B[20]}}, 20'b0};
+	assign pdt21 = {43'b0, A & {16{B[21]}}, 21'b0};
+	assign pdt22 = {42'b0, A & {16{B[22]}}, 22'b0};
+	assign pdt23 = {41'b0, A & {16{B[23]}}, 23'b0};
+	assign pdt24 = {40'b0, A & {16{B[24]}}, 24'b0};
+	assign pdt25 = {39'b0, A & {16{B[25]}}, 25'b0};
+	assign pdt26 = {38'b0, A & {16{B[26]}}, 26'b0};
+	assign pdt27 = {37'b0, A & {16{B[27]}}, 27'b0};
+	assign pdt28 = {36'b0, A & {16{B[28]}}, 28'b0};
+	assign pdt29 = {35'b0, A & {16{B[29]}}, 29'b0};
+	assign pdt30 = {34'b0, A & {16{B[30]}}, 30'b0};
+	assign pdt31 = {33'b0, A & {16{B[31]}}, 31'b0};
+
+	wire [63:0] C0_0, C0_1, C0_2, C0_3, C0_4, C0_5, C0_6, C0_7, C0_8, C0_9, C0_10, C0_11, C0_12, C0_13, C0_14, C0_15, C0_16, C0_17, C0_18, C0_19, C0_20;
+	wire [63:0] S0_0, S0_1, S0_2, S0_3, S0_4, S0_5, S0_6, S0_7, S0_8, S0_9, S0_10, S0_11, S0_12, S0_13, S0_14, S0_15, S0_16, S0_17, S0_18, S0_19, S0_20;
+
+	CSA_Adder64 ADD0_0(C0_0, S0_0, pdt0, pdt1, pdt2);
+	CSA_Adder64 ADD0_1(C0_1, S0_1, pdt3, pdt4, pdt5);
+	CSA_Adder64 ADD0_2(C0_2, S0_2, pdt6, pdt7, pdt8);
+	CSA_Adder64 ADD0_3(C0_3, S0_3, pdt9, pdt10, pdt11);
+	CSA_Adder64 ADD0_4(C0_4, S0_4, pdt12, pdt13, pdt14);
+	CSA_Adder64 ADD0_5(C0_5, S0_5, pdt15, pdt16, pdt17);
+	CSA_Adder64 ADD0_6(C0_6, S0_6, pdt18, pdt19, pdt20);
+	CSA_Adder64 ADD0_7(C0_7, S0_7, pdt21, pdt22, pdt23);
+	CSA_Adder64 ADD0_8(C0_8, S0_8, pdt24, pdt25, pdt26);
+	CSA_Adder64 ADD0_9(C0_9, S0_9, pdt27, pdt28, pdt29);
+/* ROUND 1 */
+	wire [63:0] C1_0, C1_1, C1_2, C1_3, C1_4, C1_5, C1_6;
+	wire [63:0] S1_0, S1_1, S1_2, S1_3, S1_4, S1_5, S1_6;
+
+	CSA_Adder64 ADD1_0(C1_0, S1_0, C0_0, C0_1, C0_2);
+	CSA_Adder64 ADD1_1(C1_1, S1_1, C0_3, C0_4, C0_5);
+	CSA_Adder64 ADD1_2(C1_2, S1_2, C0_6, C0_7, C0_8);
+	CSA_Adder64 ADD1_3(C1_3, S1_3, S0_0, S0_1, S0_2);
+	CSA_Adder64 ADD1_4(C1_4, S1_4, S0_3, S0_4, S0_5);
+	CSA_Adder64 ADD1_5(C1_5, S1_5, S0_6, S0_7, S0_8);
+	CSA_Adder64 ADD1_6(C1_6, S1_6, pdt30, pdt31, C0_9);
+
+/* ROUND 2 */
+	wire [63:0] C2_0, C2_1, C2_2, C2_3, C2_4;
+	wire [63:0] S2_0, S2_1, S2_2, S2_3, S2_4;
+
+	CSA_Adder64 ADD2_0(C2_0, S2_0, C1_0, C1_1, C1_2);
+	CSA_Adder64 ADD2_1(C2_1, S2_1, C1_3, C1_4, C1_5);
+	CSA_Adder64 ADD2_2(C2_2, S2_2, S1_0, S1_1, S1_2);
+	CSA_Adder64 ADD2_3(C2_3, S2_3, S1_3, S1_4, S1_5);
+	CSA_Adder64 ADD2_4(C2_4, S2_4, S0_9, C1_6, S1_6);
+
+/* ROUND 3 */
+	wire [63:0] C3_0, C3_1, C3_2;
+	wire [63:0] S3_0, S3_1, S3_2;
+
+	CSA_Adder64 ADD3_0(C3_0, S3_0, C2_0, C2_1, C2_2);
+	CSA_Adder64 ADD3_1(C3_1, S3_1, S2_0, S2_1, S2_2);
+	CSA_Adder64 ADD3_2(C3_2, S3_2, C2_3, C2_4, S2_3);
+
+/* ROUND 4 */
+	wire [63:0] C4_0, C4_1;
+	wire [63:0] S4_0, S4_1;
+
+	CSA_Adder64 ADD4_0(C4_0, S4_0, C3_0, C3_1, C3_2);
+	CSA_Adder64 ADD4_1(C4_1, S4_1, S3_0, S3_1, S3_2);
+
+/* ROUND 5 */
+	wire [63:0] C5_0;
+	wire [63:0] S5_0;
+
+	CSA_Adder64 ADD5_0(C5_0, S5_0, C4_0, C4_1, S4_0);
+
+/* ROUND 6 */
+	wire [63:0] C6_0;
+	wire [63:0] S6_0;
+
+	CSA_Adder64 ADD6_0(C6_0, S6_0, S4_1, C5_0, S5_0);
+
+endmodule
